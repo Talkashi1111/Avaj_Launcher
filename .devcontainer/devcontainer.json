@@ -1,0 +1,20 @@
+{
+	"name": "java-launcher",
+	"image": "mcr.microsoft.com/devcontainers/java:17",
+	"containerEnv": {
+		"CLAUDE_CONFIG_DIR": "/workspaces/Avaj_Launcher/.claude-history"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack"
+			],
+			"settings": {
+                "editor.formatOnSave": true,
+                "[java]": {
+                    "editor.defaultFormatter": "redhat.java"
+                }
+			}
+		}
+	}
+}
