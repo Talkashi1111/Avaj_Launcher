@@ -20,9 +20,11 @@ public class Reader {
 		} catch (NumberFormatException e) {
 			throw new InvalideFileException("Error: coordinates longitude, height and latitude must be an integer.");
 		}
-		if ((0 >= height) || (latitude <= 0) || (longitude <= 0)) {
-			throw new InvalideFileException("Error: coordinates must be between 1 to 100");
+		if ((0 > height) || (latitude < 0) || (longitude < 0)) {
+			throw new InvalideFileException("Error: coordinates must be between 0 to 100");
 		}
+		if (height > 100)
+			height = 100;
 		Coordinates p_coordinates = new Coordinates(longitude, latitude, height);
 		Flyable newAircraft = AircraftFactory.getInstance().newAircraft(type, name, p_coordinates);
 		return newAircraft;

@@ -8,7 +8,6 @@ public class JetPlane extends Aircraft {
 
 	public void updateConditions() {
 		String curr_weather = weatherTower.getWeather(coordinates);
-		// TODO: continue from here!
 		switch (curr_weather) {
 			case "RAIN": {
 				coordinates.setLatitude(coordinates.getLatitude() + 5);
@@ -24,12 +23,13 @@ public class JetPlane extends Aircraft {
 			}
 			case "FOG": {
 				coordinates.setLatitude(coordinates.getLatitude() + 1);
+				System.out.println(this.toString() + ": fog inside my jet :S");
 				break;
 			}
 			case "SNOW": {
 				coordinates.setHeight(coordinates.getHeight() - 7);
+				System.out.println(this.toString() + ": BRRR i'm freazing here!");
 				if (coordinates.getHeight() <= 0) {
-					System.out.println(this.toString() + ": BRRR i'm freazing here!");
 					weatherTower.unregister(this);
 				}
 				break;

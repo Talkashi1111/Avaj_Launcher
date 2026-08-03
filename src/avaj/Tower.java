@@ -16,7 +16,7 @@ public class Tower {
 	}
 
 	public void unregister(Flyable p_flyable) {
-		System.out.println(p_flyable.toString() + " unregistered from the weather tower.");
+		System.out.println("Tower says: " + p_flyable.toString() + " unregistered from the weather tower.");
 		observers.remove(p_flyable);
 
 	}

@@ -1,0 +1,6 @@
+10
+JetPlane MYJET 10 900 20
+Helicopter 3232323 0 100 10
+Balloon          bb 11 30 40
+Balloon mybaloon 31 99 10
+Balloon mybaloon 11 2 3
