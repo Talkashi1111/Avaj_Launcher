@@ -48,10 +48,12 @@ public class Reader {
 			int lineCount;
 			for (lineCount = 0; (line = buf.readLine()) != null; lineCount++) {
 				// System.out.println(line);
+				if (line.isBlank())
+					throw new InvalideFileException("Error: empty line is not accepted");
 				String[] words = line.trim().split("\\s+");// TODO parse this arguments
 				if (words.length != 5) {
 					throw new InvalideFileException(
-							"Error: line must containe aircraft in the form of \\\"TYPE NAME LONGITUDE LATITUDE HEIGHT\\");
+							"Error: line must containe aircraft in the form of \"TYPE NAME LONGITUDE LATITUDE HEIGHT\" ");
 				}
 				Flyable new_aircraft = parseIntoAircraft(words);
 				new_aircraft.registerTower(tower);
