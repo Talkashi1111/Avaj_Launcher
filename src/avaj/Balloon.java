@@ -12,6 +12,7 @@ public class Balloon extends Aircraft {
 				coordinates.setHeight(coordinates.getHeight() - 5);
 				System.out.println(this.toString() + ": It's raining man");
 				if (coordinates.getHeight() <= 0) {
+					System.out.println(this.toString() + " landing.");
 					weatherTower.unregister(this);
 				}
 				break;
@@ -19,8 +20,7 @@ public class Balloon extends Aircraft {
 			case "SUN": {
 				coordinates.setLongitude(coordinates.getLongitude() + 2);
 				System.out.println(this.toString() + ": Sun is high and im flying higher!");
-				if (coordinates.getHeight() + 4 <= 100)
-					coordinates.setHeight(coordinates.getHeight() + 4);
+				coordinates.setHeight(coordinates.getHeight() + 4);
 				break;
 			}
 			case "FOG": {
@@ -35,6 +35,7 @@ public class Balloon extends Aircraft {
 				coordinates.setHeight(coordinates.getHeight() - 15);
 				System.out.println(this.toString() + ": SNOWY WEATHER");
 				if (coordinates.getHeight() <= 0) {
+					System.out.println(this.toString() + " landing.");
 					weatherTower.unregister(this);
 				}
 				break;

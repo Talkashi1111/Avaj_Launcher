@@ -50,7 +50,7 @@ public class Reader {
 				// System.out.println(line);
 				if (line.isBlank())
 					throw new InvalideFileException("Error: empty line is not accepted");
-				String[] words = line.trim().split("\\s+");// TODO parse this arguments
+				String[] words = line.trim().split("\\s+");
 				if (words.length != 5) {
 					throw new InvalideFileException(
 							"Error: line must containe aircraft in the form of \"TYPE NAME LONGITUDE LATITUDE HEIGHT\" ");

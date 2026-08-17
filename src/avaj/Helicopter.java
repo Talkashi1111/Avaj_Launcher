@@ -16,21 +16,21 @@ public class Helicopter extends Aircraft {
 			case "SUN": {
 				coordinates.setLongitude(coordinates.getLongitude() + 10);
 				System.out.println(this.toString() + ": Sun is high and im flying higher!");
-				if (coordinates.getHeight() + 2 <= 100)
-					coordinates.setHeight(coordinates.getHeight() + 2);
+				coordinates.setHeight(coordinates.getHeight() + 2);
 				break;
 			}
 			case "FOG": {
 				System.out.println(this.toString() + ": I have to escape this foggy clouds!");
-				if (coordinates.getHeight() + 1 <= 100)
-					coordinates.setHeight(coordinates.getHeight() + 1);
+				coordinates.setLongitude(coordinates.getLongitude() + 1);
 				break;
 			}
 			case "SNOW": {
 				coordinates.setHeight(coordinates.getHeight() - 12);
 				System.out.println(this.toString() + ": SNOWY WEATHER");
 				if (coordinates.getHeight() <= 0) {
+					System.out.println(this.toString() + " landing.");
 					weatherTower.unregister(this);
+
 				}
 				break;
 			}

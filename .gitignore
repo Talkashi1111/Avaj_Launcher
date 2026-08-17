@@ -1,3 +1,6 @@
 *.class
 .vscode/
 .claude-history/
+out/
+sources.txt
+simulation.txt

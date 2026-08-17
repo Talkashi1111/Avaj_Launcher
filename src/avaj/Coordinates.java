@@ -24,7 +24,7 @@ public class Coordinates {
 	}
 
 	public void setHeight(int h) {
-		height = h;
+		height = Math.max(0, Math.min(h, 100));
 	}
 
 	public void setLatitude(int lat) {

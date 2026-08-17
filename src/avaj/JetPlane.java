@@ -16,8 +16,7 @@ public class JetPlane extends Aircraft {
 			}
 			case "SUN": {
 				coordinates.setLatitude(coordinates.getLatitude() + 10);
-				if (coordinates.getHeight() + 2 <= 100)
-					coordinates.setHeight(coordinates.getHeight() + 2);
+				coordinates.setHeight(coordinates.getHeight() + 2);
 				System.out.println(this.toString() + ": Screw you sunny weather! i'm too height");
 				break;
 			}
@@ -30,6 +29,7 @@ public class JetPlane extends Aircraft {
 				coordinates.setHeight(coordinates.getHeight() - 7);
 				System.out.println(this.toString() + ": BRRR i'm freazing here!");
 				if (coordinates.getHeight() <= 0) {
+					System.out.println(this.toString() + " landing.");
 					weatherTower.unregister(this);
 				}
 				break;
