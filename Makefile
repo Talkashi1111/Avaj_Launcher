@@ -4,6 +4,7 @@ MAIN	:= avaj.Main
 SCENARIO = scenario.txt
 SOURCES = $(shell find $(SRC_DIR) -name "*.java")
 TEST_DIR:= tests
+SIM_FILE := simulation.txt
 
 .PHONY: compile run clean re test
 
@@ -15,6 +16,7 @@ run: compile
 
 clean:
 	rm -rf $(OUT_DIR)
+	rm -f $(SIM_FILE)
 
 re: clean compile
 

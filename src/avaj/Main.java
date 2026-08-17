@@ -7,27 +7,27 @@ public class Main {
 	public static void main(String[] args) {
 		if (args.length != 1) {
 			System.out.println("usage: inputfile.txt");
-			return;
+			System.exit(1);
 		}
-		int simulationCount;
 		WeatherTower tower = new WeatherTower();
 		PrintStream copy_console = System.out;
 		try {
-			System.setOut(new PrintStream("simulation.txt"));
-		} catch (FileNotFoundException e) {
-			System.out.println("Error: failed to created file simulation.txt");
-			return;
-		}
-		try {
-			Reader reader = new Reader();
-			simulationCount = reader.read(args[0], tower);
-			for (int i = 0; i < simulationCount; i++)
-				tower.changeWeather();
-			System.out.flush();
-
+			Scenario scenario = new Reader().read(args[0]);
+			try (PrintStream out = new PrintStream("simulation.txt")) {
+				System.setOut(out);
+				for (Flyable f : scenario.aircrafts()) {
+					f.registerTower(tower);
+				}
+				for (int i = 0; i < scenario.simulationCount(); i++)
+					tower.changeWeather();
+			}
 		} catch (InvalideFileException e) {
 			copy_console.println(e.getMessage());
+			System.exit(1);
 
+		} catch (FileNotFoundException e) {
+			copy_console.println("Error: failed to create file simulation.txt");
+			System.exit(1);
 		}
 	}
 }

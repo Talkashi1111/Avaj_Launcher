@@ -3,6 +3,8 @@ package avaj;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
+import java.util.ArrayList;
 
 public class Reader {
 	Reader() {
@@ -20,7 +22,7 @@ public class Reader {
 		} catch (NumberFormatException e) {
 			throw new InvalideFileException("Error: coordinates longitude, height and latitude must be an integer.");
 		}
-		if ((0 > height) || (latitude < 0) || (longitude < 0)) {
+		if ((0 > height) || (latitude <= 0) || (longitude <= 0)) {
 			throw new InvalideFileException("Error: coordinates must be between 0 to 100");
 		}
 		if (height > 100)
@@ -31,38 +33,36 @@ public class Reader {
 
 	}
 
-	public int read(String filename, WeatherTower tower) {
-		try (BufferedReader buf = new BufferedReader(new FileReader(filename));) {
-			String line;
-			line = buf.readLine();
+	public Scenario read(String filename) {
+		List<Flyable> aircraft = new ArrayList<>();
+		try (BufferedReader buf = new BufferedReader(new FileReader(filename))) {
+			String line = buf.readLine().trim();
 			if (line == null)
 				throw new InvalideFileException("Error: file is empty");
-			int i;
+			int simulationCount;
 			try {
-				i = Integer.parseInt(line);
+				simulationCount = Integer.parseInt(line);
 			} catch (NumberFormatException e) {
 				throw (new InvalideFileException("Error: first line of file must be an integer"));
 			}
-			if (i < 0)
+			if (simulationCount <= 0)
 				throw new InvalideFileException("Error: first line of file must be a positive integer");
-			int lineCount;
-			for (lineCount = 0; (line = buf.readLine()) != null; lineCount++) {
-				// System.out.println(line);
+
+			while ((line = buf.readLine()) != null) {
 				if (line.isBlank())
 					throw new InvalideFileException("Error: empty line is not accepted");
 				String[] words = line.trim().split("\\s+");
 				if (words.length != 5) {
 					throw new InvalideFileException(
-							"Error: line must containe aircraft in the form of \"TYPE NAME LONGITUDE LATITUDE HEIGHT\" ");
+							"Error: line must contain aircraft in the form of \"TYPE NAME LONGITUDE LATITUDE HEIGHT\"");
 				}
-				Flyable new_aircraft = parseIntoAircraft(words);
-				new_aircraft.registerTower(tower);
+				aircraft.add(parseIntoAircraft(words));
 			}
-			if (lineCount == 0) {
+			if (aircraft.isEmpty()) {
 				throw new InvalideFileException(
 						"Error: file must contain at least one aircraft in the form of \"TYPE NAME LONGITUDE LATITUDE HEIGHT\"");
 			}
-			return i;
+			return new Scenario(simulationCount, aircraft);
 		} catch (IOException e) {
 			throw new InvalideFileException("Couldn't open file: " + filename);
 		}
