@@ -17,6 +17,7 @@ run: compile
 clean:
 	rm -rf $(OUT_DIR)
 	rm -f $(SIM_FILE)
+	find . -name "*.class" -type f -delete
 
 re: clean compile
 
